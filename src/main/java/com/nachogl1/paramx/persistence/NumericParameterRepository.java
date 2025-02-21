@@ -1,0 +1,18 @@
+package com.nachogl1.paramx.persistence;
+
+import com.nachogl1.paramx.model.NumericParameter;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+import java.util.UUID;
+
+@Repository
+public interface NumericParameterRepository {
+    List<NumericParameter> getAll();
+
+    NumericParameter add(NumericParameter parameter);
+
+    NumericParameter update(NumericParameter parameter);
+
+    void delete(UUID parameterId);
+}
