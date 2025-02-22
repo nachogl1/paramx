@@ -15,19 +15,18 @@ public class TextParameterService {
     private TextParameterRepository repository;
 
     public List<TextParameter> getAll() {
-        return repository.getAll();
+        return repository.findAll();
     }
 
-    public TextParameter add(TextParameter parameter) {
-        return repository.add(parameter);
+    public TextParameter save(TextParameter parameter) {
+        return repository.save(parameter);
     }
 
-    public TextParameter update(TextParameter parameter) {
-        return repository.update(parameter);
-    }
 
     public void delete(UUID parameterId) {
-        repository.delete(parameterId);
+        final TextParameter parameter = repository.findById(parameterId)
+                .orElseThrow();
+        repository.delete(parameter);
     }
 
 }

@@ -1,5 +1,6 @@
 package com.nachogl1.paramx.model;
 
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,11 +15,14 @@ import java.util.UUID;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@Entity
 public class TextParameter {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
-    private String value;
+    private String valueParameter;
     private LocalDate date;
     private String name;
-    private UUID userId;
 
 }

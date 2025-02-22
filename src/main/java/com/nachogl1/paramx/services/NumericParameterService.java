@@ -15,19 +15,17 @@ public class NumericParameterService {
     private NumericParameterRepository repository;
 
     public List<NumericParameter> getAll() {
-        return repository.getAll();
+        return repository.findAll();
     }
 
-    public NumericParameter add(NumericParameter parameter) {
-        return repository.add(parameter);
-    }
-
-    public NumericParameter update(NumericParameter parameter) {
-        return repository.update(parameter);
+    public NumericParameter save(NumericParameter parameter) {
+        return repository.save(parameter);
     }
 
     public void delete(UUID parameterId) {
-        repository.delete(parameterId);
+        final NumericParameter parameter = repository.findById(parameterId)
+                .orElseThrow();
+        repository.delete(parameter);
     }
 
 }

@@ -3,7 +3,7 @@ package com.nachogl1.paramx.controllers;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import com.nachogl1.paramx.model.User;
+import com.nachogl1.paramx.model.ParamUser;
 import com.nachogl1.paramx.services.UserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +20,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(controllers = UserController.class)
-public class UserParametersControllerTests {
+public class ParamUserParametersControllerTests {
     @Autowired
     private MockMvc mockMvc;
 
@@ -32,7 +32,7 @@ public class UserParametersControllerTests {
     void returnAnUser() throws Exception {
 
         final UUID id = UUID.randomUUID();
-        final User expected = User.builder().id(id).firstName("testName").secondName("testSecondName").build();
+        final ParamUser expected = ParamUser.builder().id(id).firstName("testName").secondName("testSecondName").build();
 
         when(service.get(id)).thenReturn(expected);
 
@@ -41,7 +41,7 @@ public class UserParametersControllerTests {
         String json = result.getResponse().getContentAsString();
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.registerModule(new JavaTimeModule()); //to parse localdate object
-        User user = objectMapper.readValue(json, new TypeReference<>() {
+        ParamUser user = objectMapper.readValue(json, new TypeReference<>() {
         });
 
         assertEquals(expected, user);

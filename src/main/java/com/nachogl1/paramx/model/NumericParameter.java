@@ -1,5 +1,9 @@
 package com.nachogl1.paramx.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,13 +18,15 @@ import java.util.UUID;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@Entity
 public class NumericParameter {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
-    private BigDecimal value;
+    private BigDecimal valueParameter;
     private LocalDate date;
     private String name;
-    private UUID userId;
-
 
 
 }
