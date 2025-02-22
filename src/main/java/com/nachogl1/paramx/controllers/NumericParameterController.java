@@ -26,7 +26,7 @@ public class NumericParameterController {
 
     @PostMapping("/numericParameters")
     public ResponseEntity<?> add(@RequestBody NumericParameter parameter) {
-        final NumericParameter responseBody = service.add(parameter);
+        final NumericParameter responseBody = service.save(parameter);
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(responseBody);
@@ -34,7 +34,7 @@ public class NumericParameterController {
 
     @PutMapping("/numericParameters")
     public ResponseEntity<?> update(@RequestBody NumericParameter parameter) {
-        final NumericParameter responseBody = service.update(parameter);
+        final NumericParameter responseBody = service.save(parameter);
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(responseBody);

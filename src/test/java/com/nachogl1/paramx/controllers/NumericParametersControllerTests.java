@@ -38,12 +38,12 @@ public class NumericParametersControllerTests {
                 NumericParameter.builder()
                         .date(LocalDate.now())
                         .name("testName")
-                        .value(new BigDecimal("9.0"))
+                        .valueParameter(new BigDecimal("9.0"))
                         .build(),
                 NumericParameter.builder()
                         .date(LocalDate.now())
                         .name("testName2")
-                        .value(new BigDecimal("9.0"))
+                        .valueParameter(new BigDecimal("9.0"))
                         .build()
 
         ));

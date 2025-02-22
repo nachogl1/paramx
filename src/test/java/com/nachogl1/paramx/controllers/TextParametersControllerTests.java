@@ -3,9 +3,7 @@ package com.nachogl1.paramx.controllers;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import com.nachogl1.paramx.model.NumericParameter;
 import com.nachogl1.paramx.model.TextParameter;
-import com.nachogl1.paramx.services.NumericParameterService;
 import com.nachogl1.paramx.services.TextParameterService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +12,6 @@ import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -40,12 +37,12 @@ public class TextParametersControllerTests {
                 TextParameter.builder()
                         .date(LocalDate.now())
                         .name("testName")
-                        .value("testValue1")
+                        .valueParameter("testValue1")
                         .build(),
                 TextParameter.builder()
                         .date(LocalDate.now())
                         .name("testName2")
-                        .value("testValue2")
+                        .valueParameter("testValue2")
                         .build()
 
         ));

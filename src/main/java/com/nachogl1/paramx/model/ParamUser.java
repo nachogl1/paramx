@@ -1,5 +1,6 @@
 package com.nachogl1.paramx.model;
 
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,11 +13,19 @@ import java.util.UUID;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class User {
+@Entity
+public class ParamUser {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
     private String firstName;
     private String secondName;
+    @OneToMany
+    @JoinColumn(name = "user_id")
     private List<NumericParameter> numericParameterList;
+    @OneToMany
+    @JoinColumn(name = "user_id")
     private List<TextParameter> textParametersList;
 
 }

@@ -26,7 +26,7 @@ public class TextParameterController {
 
     @PostMapping("/textParameters")
     public ResponseEntity<?> add(@RequestBody TextParameter parameter) {
-        final TextParameter responseBody = service.add(parameter);
+        final TextParameter responseBody = service.save(parameter);
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(responseBody);
@@ -34,7 +34,7 @@ public class TextParameterController {
 
     @PutMapping("/textParameters")
     public ResponseEntity<?> update(@RequestBody TextParameter parameter) {
-        final TextParameter responseBody = service.update(parameter);
+        final TextParameter responseBody = service.save(parameter);
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(responseBody);
