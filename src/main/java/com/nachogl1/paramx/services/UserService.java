@@ -1,7 +1,7 @@
 package com.nachogl1.paramx.services;
 
 import com.nachogl1.paramx.model.ParamUser;
-import com.nachogl1.paramx.persistence.UserRepository;
+import com.nachogl1.paramx.persistence.ParamUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,20 +11,20 @@ import java.util.UUID;
 public class UserService {
 
     @Autowired
-    private UserRepository repository;
+    private ParamUserRepository repository;
 
-    public ParamUser get(UUID userId) {
-        return repository.findById(userId).orElseThrow();
+    public ParamUser get(UUID paramUserId) {
+        return repository.findById(paramUserId).orElseThrow();
     }
 
-    public ParamUser save(ParamUser user) {
-        return repository.save(user);
+    public ParamUser save(ParamUser paramUser) {
+        return repository.save(paramUser);
     }
 
-    public void delete(UUID userId) {
-        final ParamUser user = repository.findById(userId)
+    public void delete(UUID paramUserId) {
+        final ParamUser paramUser = repository.findById(paramUserId)
                 .orElseThrow();
-        repository.delete(user);
+        repository.delete(paramUser);
     }
 
 }

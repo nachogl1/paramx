@@ -10,6 +10,6 @@ import java.util.UUID;
 @Repository
 public interface TextParameterRepository extends JpaRepository<TextParameter, UUID> {
 
-    List<TextParameter> findAllByParamUserId(UUID userId);
+    List<TextParameter> findAllByParamUserId(UUID paramUserId);
 
 }

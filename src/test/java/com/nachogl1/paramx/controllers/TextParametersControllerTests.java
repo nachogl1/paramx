@@ -41,7 +41,7 @@ public class TextParametersControllerTests {
                 .secondName("secondName")
                 .build();
 
-        when(service.getAllByUser(user.getId())).thenReturn(List.of(
+        when(service.getAllByParamUser(user.getId())).thenReturn(List.of(
                 TextParameter.builder()
                         .date(LocalDate.now())
                         .name("testName")

@@ -16,9 +16,9 @@ public class TextParameterController {
     @Autowired
     private TextParameterService service;
 
-    @GetMapping("/textParameters/{userId}")
-    public ResponseEntity<?> getAllByUser(@PathVariable UUID userId) {
-        final List<TextParameter> responseBody = service.getAllByUser(userId);
+    @GetMapping("/textParameters/{paramUserId}")
+    public ResponseEntity<?> getAllByUser(@PathVariable UUID paramUserId) {
+        final List<TextParameter> responseBody = service.getAllByParamUser(paramUserId);
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(responseBody);
