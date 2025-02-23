@@ -39,9 +39,9 @@ public class UserController {
                 .body(responseBody);
     }
 
-    @DeleteMapping("/users")
-    public ResponseEntity<?> delete(@PathVariable UUID parameterId) {
-        service.delete(parameterId);
+    @DeleteMapping("/users/{userId}")
+    public ResponseEntity<?> delete(@PathVariable UUID userId) {
+        service.delete(userId);
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .build();
