@@ -15,33 +15,33 @@ public class UserController {
     @Autowired
     private UserService service;
 
-    @GetMapping("/users/{userId}")
-    public ResponseEntity<?> get(@PathVariable UUID userId) {
-        final ParamUser responseBody = service.get(userId);
+    @GetMapping("/users/{paramUserId}")
+    public ResponseEntity<?> get(@PathVariable UUID paramUserId) {
+        final ParamUser responseBody = service.get(paramUserId);
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(responseBody);
     }
 
     @PostMapping("/users")
-    public ResponseEntity<?> add(@RequestBody ParamUser user) {
-        final ParamUser responseBody = service.save(user);
+    public ResponseEntity<?> add(@RequestBody ParamUser paramUser) {
+        final ParamUser responseBody = service.save(paramUser);
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(responseBody);
     }
 
     @PutMapping("/users")
-    public ResponseEntity<?> update(@RequestBody ParamUser user) {
-        final ParamUser responseBody = service.save(user);
+    public ResponseEntity<?> update(@RequestBody ParamUser paramUser) {
+        final ParamUser responseBody = service.save(paramUser);
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(responseBody);
     }
 
-    @DeleteMapping("/users")
-    public ResponseEntity<?> delete(@PathVariable UUID parameterId) {
-        service.delete(parameterId);
+    @DeleteMapping("/users/{paramUserId}")
+    public ResponseEntity<?> delete(@PathVariable UUID paramUserId) {
+        service.delete(paramUserId);
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .build();

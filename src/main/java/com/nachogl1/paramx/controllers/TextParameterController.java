@@ -16,9 +16,9 @@ public class TextParameterController {
     @Autowired
     private TextParameterService service;
 
-    @GetMapping("/textParameters")
-    public ResponseEntity<?> getAll() {
-        final List<TextParameter> responseBody = service.getAll();
+    @GetMapping("/textParameters/{paramUserId}")
+    public ResponseEntity<?> getAllByUser(@PathVariable UUID paramUserId) {
+        final List<TextParameter> responseBody = service.getAllByParamUser(paramUserId);
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(responseBody);
@@ -40,7 +40,7 @@ public class TextParameterController {
                 .body(responseBody);
     }
 
-    @DeleteMapping("/textParameters")
+    @DeleteMapping("/textParameters/{parameterId}")
     public ResponseEntity<?> delete(@PathVariable UUID parameterId) {
         service.delete(parameterId);
         return ResponseEntity

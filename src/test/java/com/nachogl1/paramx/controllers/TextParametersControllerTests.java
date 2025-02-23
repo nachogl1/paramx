@@ -3,6 +3,7 @@ package com.nachogl1.paramx.controllers;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.nachogl1.paramx.model.ParamUser;
 import com.nachogl1.paramx.model.TextParameter;
 import com.nachogl1.paramx.services.TextParameterService;
 import org.junit.jupiter.api.Test;
@@ -14,6 +15,7 @@ import org.springframework.test.web.servlet.MvcResult;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -32,22 +34,30 @@ public class TextParametersControllerTests {
 
     @Test
     void returnAllParameters() throws Exception {
+        UUID userId = UUID.randomUUID();
+        final ParamUser user = ParamUser.builder()
+                .id(userId)
+                .firstName("testName")
+                .secondName("secondName")
+                .build();
 
-        when(service.getAll()).thenReturn(List.of(
+        when(service.getAllByParamUser(user.getId())).thenReturn(List.of(
                 TextParameter.builder()
                         .date(LocalDate.now())
                         .name("testName")
                         .valueParameter("testValue1")
+                        .paramUser(user)
                         .build(),
                 TextParameter.builder()
                         .date(LocalDate.now())
                         .name("testName2")
+                        .paramUser(user)
                         .valueParameter("testValue2")
                         .build()
 
         ));
 
-        MvcResult result = this.mockMvc.perform(get("/textParameters"))
+        MvcResult result = this.mockMvc.perform(get("/textParameters/{id}", userId))
                 .andExpect(status().isOk())
                 .andReturn();
 

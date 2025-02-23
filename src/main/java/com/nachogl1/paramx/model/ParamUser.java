@@ -1,6 +1,8 @@
 package com.nachogl1.paramx.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,13 +21,14 @@ public class ParamUser {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
+    @NotEmpty
+    @Column(nullable = false)
     private String firstName;
+    @NotEmpty
+    @Column(nullable = false)
     private String secondName;
-    @OneToMany
-    @JoinColumn(name = "user_id")
-    private List<NumericParameter> numericParameterList;
-    @OneToMany
-    @JoinColumn(name = "user_id")
+    @JsonManagedReference
+    @OneToMany(mappedBy = "paramUser",cascade = CascadeType.REMOVE)
     private List<TextParameter> textParametersList;
 
 }
