@@ -17,7 +17,7 @@ public class TextParameterController {
     private TextParameterService service;
 
     @GetMapping("/textParameters/{paramUserId}")
-    public ResponseEntity<?> getAllByUser(@PathVariable UUID paramUserId) {
+    public ResponseEntity<List<TextParameter>> getAllByUser(@PathVariable UUID paramUserId) {
         final List<TextParameter> responseBody = service.getAllByParamUser(paramUserId);
         return ResponseEntity
                 .status(HttpStatus.OK)
@@ -25,15 +25,15 @@ public class TextParameterController {
     }
 
     @PostMapping("/textParameters")
-    public ResponseEntity<?> add(@RequestBody TextParameter parameter) {
+    public ResponseEntity<TextParameter> add(@RequestBody TextParameter parameter) {
         final TextParameter responseBody = service.save(parameter);
         return ResponseEntity
-                .status(HttpStatus.OK)
+                .status(HttpStatus.CREATED)
                 .body(responseBody);
     }
 
     @PutMapping("/textParameters")
-    public ResponseEntity<?> update(@RequestBody TextParameter parameter) {
+    public ResponseEntity<TextParameter> update(@RequestBody TextParameter parameter) {
         final TextParameter responseBody = service.save(parameter);
         return ResponseEntity
                 .status(HttpStatus.OK)
@@ -41,7 +41,7 @@ public class TextParameterController {
     }
 
     @DeleteMapping("/textParameters/{parameterId}")
-    public ResponseEntity<?> delete(@PathVariable UUID parameterId) {
+    public ResponseEntity<Void> delete(@PathVariable UUID parameterId) {
         service.delete(parameterId);
         return ResponseEntity
                 .status(HttpStatus.OK)
