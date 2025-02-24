@@ -10,13 +10,13 @@ import org.springframework.web.bind.annotation.*;
 import java.util.UUID;
 
 @RestController
-public class UserController {
+public class ParamUserController {
 
     @Autowired
     private UserService service;
 
     @GetMapping("/users/{paramUserId}")
-    public ResponseEntity<?> get(@PathVariable UUID paramUserId) {
+    public ResponseEntity<ParamUser> get(@PathVariable UUID paramUserId) {
         final ParamUser responseBody = service.get(paramUserId);
         return ResponseEntity
                 .status(HttpStatus.OK)
@@ -24,15 +24,15 @@ public class UserController {
     }
 
     @PostMapping("/users")
-    public ResponseEntity<?> add(@RequestBody ParamUser paramUser) {
+    public ResponseEntity<ParamUser> add(@RequestBody ParamUser paramUser) {
         final ParamUser responseBody = service.save(paramUser);
         return ResponseEntity
-                .status(HttpStatus.OK)
+                .status(HttpStatus.CREATED)
                 .body(responseBody);
     }
 
     @PutMapping("/users")
-    public ResponseEntity<?> update(@RequestBody ParamUser paramUser) {
+    public ResponseEntity<ParamUser> update(@RequestBody ParamUser paramUser) {
         final ParamUser responseBody = service.save(paramUser);
         return ResponseEntity
                 .status(HttpStatus.OK)
@@ -40,7 +40,7 @@ public class UserController {
     }
 
     @DeleteMapping("/users/{paramUserId}")
-    public ResponseEntity<?> delete(@PathVariable UUID paramUserId) {
+    public ResponseEntity<Void> delete(@PathVariable UUID paramUserId) {
         service.delete(paramUserId);
         return ResponseEntity
                 .status(HttpStatus.OK)
