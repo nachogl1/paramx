@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -18,6 +19,14 @@ public class ParamUserController {
     @GetMapping("/users/{paramUserId}")
     public ResponseEntity<ParamUser> get(@PathVariable UUID paramUserId) {
         final ParamUser responseBody = service.get(paramUserId);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(responseBody);
+    }
+
+    @GetMapping("/users")
+    public ResponseEntity<List<ParamUser>> getAll() {
+        final List<ParamUser> responseBody = service.getAll();
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(responseBody);

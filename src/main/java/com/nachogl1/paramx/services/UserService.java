@@ -5,6 +5,7 @@ import com.nachogl1.paramx.persistence.ParamUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -27,4 +28,7 @@ public class UserService {
         repository.delete(paramUser);
     }
 
+    public List<ParamUser> getAll() {
+        return this.repository.findAll();
+    }
 }
