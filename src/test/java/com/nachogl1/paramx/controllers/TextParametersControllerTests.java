@@ -38,8 +38,10 @@ public class TextParametersControllerTests {
         final ParamUser user = ParamUser.builder()
                 .id(userId)
                 .firstName("testName")
+                .email("email")
                 .secondName("secondName")
                 .build();
+
 
         when(service.getAllByParamUser(user.getId())).thenReturn(List.of(
                 TextParameter.builder()

@@ -20,6 +20,7 @@ public class ParamUser {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @NotEmpty
     private UUID id;
     @NotEmpty
     @Column(nullable = false)
@@ -27,8 +28,12 @@ public class ParamUser {
     @NotEmpty
     @Column(nullable = false)
     private String secondName;
+    @NotEmpty
+    @Column(nullable = false)
+    private String email;
     @JsonManagedReference
     @OneToMany(mappedBy = "paramUser",cascade = CascadeType.REMOVE)
     private List<TextParameter> textParametersList;
+
 
 }

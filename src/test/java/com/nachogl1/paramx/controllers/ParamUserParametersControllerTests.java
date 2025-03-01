@@ -32,7 +32,7 @@ public class ParamUserParametersControllerTests {
     void returnAnUser() throws Exception {
 
         final UUID id = UUID.randomUUID();
-        final ParamUser expected = ParamUser.builder().id(id).firstName("testName").secondName("testSecondName").build();
+        final ParamUser expected = ParamUser.builder().id(id).firstName("testName").secondName("testSecondName").email("email").build();
 
         when(service.get(id)).thenReturn(expected);
 

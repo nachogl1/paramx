@@ -11,6 +11,6 @@ import java.util.UUID;
 @Repository
 public interface ParamUserRepository extends JpaRepository<ParamUser, UUID> {
 
-    @Query("SELECT new ParamUser(p.id, p.firstName, p.secondName,null) FROM ParamUser p")
+    @Query("SELECT new ParamUser(p.id, p.firstName, p.secondName, p.email,null) FROM ParamUser p")
     List<ParamUser> findAllParamUsersWithoutTextParametersList();
 }
