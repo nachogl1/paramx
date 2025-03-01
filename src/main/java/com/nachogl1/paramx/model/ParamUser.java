@@ -2,6 +2,7 @@ package com.nachogl1.paramx.model;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,16 +21,17 @@ public class ParamUser {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @NotEmpty
     private UUID id;
-    @NotEmpty
+    @NotEmpty(message = "First name is mandatory")
     @Column(nullable = false)
     private String firstName;
     @NotEmpty
     @Column(nullable = false)
+    @NotEmpty(message = "Second name is mandatory")
     private String secondName;
-    @NotEmpty
+    @NotEmpty(message = "Email is mandatory")
     @Column(nullable = false)
+    @Email(message = "Email should have valid format")
     private String email;
     @JsonManagedReference
     @OneToMany(mappedBy = "paramUser",cascade = CascadeType.REMOVE)

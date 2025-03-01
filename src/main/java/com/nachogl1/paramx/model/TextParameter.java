@@ -22,16 +22,16 @@ public class TextParameter {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
-    @NotEmpty
+    @NotEmpty(message = "Date is mandatory")
     @Column(nullable = false)
     private LocalDate date;
-    @NotEmpty
+    @NotEmpty(message = "Parameter value is mandatory")
     @Column(nullable = false)
     private String valueParameter;
-    @NotEmpty
+    @NotEmpty(message = "Parameter name is mandatory")
     @Column(nullable = false)
     private String name;
-    @NotEmpty
+    @NotEmpty(message = "Associated user is mandatory for this parameter")
     @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "paramUserId", nullable = false)
