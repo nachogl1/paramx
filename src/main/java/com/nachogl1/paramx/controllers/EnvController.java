@@ -14,7 +14,7 @@ public class EnvController {
 
     @GetMapping("/env")
     public String get() {
-        log.info("--*Fetching the env profile*--");
+        log.info("--*Fetching the env profile: "+ this.val +" *--");
         return this.val;
     }
 }

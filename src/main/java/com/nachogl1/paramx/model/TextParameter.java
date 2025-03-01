@@ -3,6 +3,7 @@ package com.nachogl1.paramx.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -22,7 +23,7 @@ public class TextParameter {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
-    @NotEmpty(message = "Date is mandatory")
+    @NotNull(message = "Date is mandatory")
     @Column(nullable = false)
     private LocalDate date;
     @NotEmpty(message = "Parameter value is mandatory")
@@ -31,7 +32,7 @@ public class TextParameter {
     @NotEmpty(message = "Parameter name is mandatory")
     @Column(nullable = false)
     private String name;
-    @NotEmpty(message = "Associated user is mandatory for this parameter")
+    @NotNull(message = "Associated user is mandatory for this parameter")
     @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "paramUserId", nullable = false)
