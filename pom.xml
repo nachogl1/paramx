@@ -101,6 +101,24 @@
     <build>
         <plugins>
             <plugin>
+                <groupId>io.github.pepperkit</groupId>
+                <artifactId>git-hooks-maven-plugin</artifactId>
+                <version>1.1.0</version>
+                <executions>
+                    <!-- It will automatically trigger `init` goal at each initialize project maven phase. -->
+                    <execution>
+                        <goals>
+                            <goal>initHooks</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <hooks>
+                        <pre-commit>mvn test</pre-commit>
+                    </hooks>
+                </configuration>
+            </plugin>
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
                 <version>3.3.0</version>
