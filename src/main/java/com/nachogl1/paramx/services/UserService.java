@@ -29,6 +29,6 @@ public class UserService {
     }
 
     public List<ParamUser> getAll() {
-        return this.repository.findAll();
+        return this.repository.findAllParamUsersWithoutTextParametersList();
     }
 }
