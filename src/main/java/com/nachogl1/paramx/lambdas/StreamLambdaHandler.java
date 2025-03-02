@@ -11,7 +11,6 @@ import com.nachogl1.paramx.ParamxApplication;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.nio.charset.StandardCharsets;
 
 public class StreamLambdaHandler implements RequestStreamHandler {
     private static SpringBootLambdaContainerHandler<AwsProxyRequest, AwsProxyResponse> handler;
@@ -28,9 +27,6 @@ public class StreamLambdaHandler implements RequestStreamHandler {
     @Override
     public void handleRequest(InputStream inputStream, OutputStream outputStream, Context context)
             throws IOException {
-
-        String eventJson = new String(inputStream.readAllBytes(), StandardCharsets.UTF_8);
-        context.getLogger().log("Received event: " + eventJson);
 
         handler.proxyStream(inputStream, outputStream, context);
     }
