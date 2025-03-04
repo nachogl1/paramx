@@ -3,6 +3,11 @@ package com.nachogl1.paramx.e2e;
 import io.restassured.http.ContentType;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
+import org.springframework.http.HttpStatus;
+
+import java.util.stream.Stream;
 
 import static com.nachogl1.paramx.e2e.E2ETestUtils.givenAUserIsCreated;
 import static io.restassured.RestAssured.given;
@@ -169,6 +174,55 @@ public class E2EParamUserTests extends E2ETests {
                 .body("[0].email", equalTo("John@hotmail.com"))
                 .body("[0].textParametersList", nullValue());
 
+    }
+
+    @ParameterizedTest
+    @MethodSource("dataProvider")
+    public void givenANonValidUser_WhenAddingIt_ThenItThrows(final String inputJson) {
+        given()
+                .contentType(ContentType.JSON)
+                .body(inputJson)
+                .when()
+                .post("/users")
+                .then()
+                .statusCode(400)
+                .body("message", notNullValue())
+                .body("status", equalTo("BAD_REQUEST"))
+                .body("statusCode", equalTo(HttpStatus.BAD_REQUEST.value()))
+                .body("timestamp", notNullValue());
+    }
+
+    static Stream<String> dataProvider() {
+        return Stream.of(
+                """
+                        {
+                        "firstName":"",
+                        "secondName": "test",
+                        "email":"test@hotmail.com"
+                        }
+                        """,
+                """
+                        {
+                        "firstName":"test",
+                        "secondName": "",
+                        "email":"test@hotmail.com"
+                        }
+                        """,
+                """
+                        {
+                        "firstName":"test",
+                        "secondName": "test",
+                        "email":"test@.com"
+                        }
+                        """,
+                """
+                        {
+                        "firstName":"test",
+                        "secondName": "test",
+                        "email":""
+                        }
+                        """
+        );
     }
 
 

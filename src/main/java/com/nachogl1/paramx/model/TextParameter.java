@@ -1,6 +1,7 @@
 package com.nachogl1.paramx.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -25,6 +26,7 @@ public class TextParameter {
     private UUID id;
     @NotNull(message = "Date is mandatory")
     @Column(nullable = false)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate date;
     @NotEmpty(message = "Parameter value is mandatory")
     @Column(nullable = false)

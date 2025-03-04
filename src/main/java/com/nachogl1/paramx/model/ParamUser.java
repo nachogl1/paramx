@@ -30,7 +30,7 @@ public class ParamUser {
     @NotEmpty(message = "Second name is mandatory")
     private String secondName;
     @NotEmpty(message = "Email is mandatory")
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     @Email(message = "Email should have valid format")
     private String email;
     @JsonManagedReference

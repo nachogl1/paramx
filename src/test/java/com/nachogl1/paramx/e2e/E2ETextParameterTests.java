@@ -2,6 +2,7 @@ package com.nachogl1.paramx.e2e;
 
 import io.restassured.http.ContentType;
 import org.junit.jupiter.api.Test;
+import org.springframework.http.HttpStatus;
 
 import static com.nachogl1.paramx.e2e.E2ETestUtils.givenAUserIsCreated;
 import static com.nachogl1.paramx.e2e.E2ETestUtils.givenAUserParameterIsCreated;
@@ -262,8 +263,11 @@ public class E2ETextParameterTests extends E2ETests {
                 .pathParam("paramUserId", paramUserId)
                 .get("/users/{paramUserId}")
                 .then()
-                .statusCode(500)
-                .body("error", equalTo("Internal Server Error")); //todo: this will change with the new iteration of the model and its exceptions
+                .statusCode(404)
+                .body("message", equalTo("User does not exists"))
+                .body("status", equalTo("NOT_FOUND"))
+                .body("statusCode", equalTo(HttpStatus.NOT_FOUND.value()))
+                .body("timestamp", notNullValue());
 
 
         given()

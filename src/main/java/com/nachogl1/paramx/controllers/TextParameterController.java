@@ -31,7 +31,6 @@ public class TextParameterController {
     @PostMapping("/textParameters")
     public ResponseEntity<TextParameter> add(@RequestBody TextParameter parameter) {
         log.info(String.format("--*Creating instance of param: %s *--", parameter.getName()));
-        System.out.println(parameter.getDate());
         final TextParameter responseBody = service.save(parameter);
         return ResponseEntity
                 .status(HttpStatus.CREATED)

@@ -1,4 +1,4 @@
-package com.nachogl1.paramx.persistence;
+package com.nachogl1.paramx.daos;
 
 import com.nachogl1.paramx.model.TextParameter;
 import org.springframework.data.jpa.repository.JpaRepository;
