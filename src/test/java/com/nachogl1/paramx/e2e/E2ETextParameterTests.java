@@ -14,7 +14,7 @@ public class E2ETextParameterTests extends E2ETests {
 
 
     @Test
-    public void givenAPAram_WhenAdded_ThenResponseReturnsParam() {
+    public void givenAParam_WhenAdded_ThenResponseReturnsParam() {
 
         String paramUserId = givenAUserIsCreated("John", "Doe", "John@hotmail.com")
                 .when()
@@ -32,6 +32,32 @@ public class E2ETextParameterTests extends E2ETests {
                 .body("date", equalTo("2024-05-01"))
                 .body("valueParameter", equalTo("testValue"))
                 .body("name", equalTo("testName"));
+
+    }
+
+    @Test
+    public void givenAParamAdded_WhenFetchingParamNames_ThenReturnOneName() {
+
+        String paramUserId = givenAUserIsCreated("John", "Doe", "John@hotmail.com")
+                .when()
+                .post("/users")
+                .jsonPath()
+                .getString("id");
+
+        givenAUserParameterIsCreated("testName", "testValue", "2024-05-01", paramUserId)
+                .when()
+                .post("/textParameters");
+
+        given()
+                .contentType(ContentType.JSON)
+                .when()
+                .pathParam("paramUserId", paramUserId)
+                .get("/textParameters/names/{paramUserId}")
+                .then()
+                .statusCode(200)
+                .contentType(ContentType.JSON)
+                .body("", contains("testName"));
+
 
     }
 
