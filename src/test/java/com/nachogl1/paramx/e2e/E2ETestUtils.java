@@ -7,7 +7,7 @@ import static io.restassured.RestAssured.given;
 
 public class E2ETestUtils {
 
-    static RequestSpecification givenAUserIsCreated(String firstName, String secondName, String email){
+    static RequestSpecification givenAUserIsCreated(String firstName, String secondName, String email) {
         return given()
                 .contentType(ContentType.JSON)
                 .body(String.format("""
@@ -16,10 +16,10 @@ public class E2ETestUtils {
                         "secondName": "%s",
                         "email":"%s"
                         }
-                        """, firstName, secondName,email));
+                        """, firstName, secondName, email));
     }
 
-    static RequestSpecification givenAUserParameterIsCreated(String name, String value, String date, String paramUserId){
+    static RequestSpecification givenAUserParameterIsCreated(String name, String value, String date, String paramUserId) {
         return given()
                 .contentType(ContentType.JSON)
                 .body(String.format("""
@@ -32,6 +32,19 @@ public class E2ETestUtils {
                             }
                         }
                         """, date, value, name, paramUserId));
+    }
+
+    static RequestSpecification givenAUserParameterNameIsCreated(String name, String paramUserId) {
+        return given()
+                .contentType(ContentType.JSON)
+                .body(String.format("""
+                        {
+                        "name":"%s",
+                        "paramUser":{
+                                "id":"%s"
+                            }
+                        }
+                        """, name, paramUserId));
     }
 
 

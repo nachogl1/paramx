@@ -1,11 +1,8 @@
 package com.nachogl1.paramx.services;
 
-import com.nachogl1.paramx.daos.ParamUserRepository;
-import com.nachogl1.paramx.daos.TextParameterNameRepository;
-import com.nachogl1.paramx.daos.TextParameterRepository;
+import com.nachogl1.paramx.daos.TextParameterNameRepositoryV2;
 import com.nachogl1.paramx.exceptions.ParamxApiException;
-import com.nachogl1.paramx.model.ParamUser;
-import com.nachogl1.paramx.model.TextParameter;
+import com.nachogl1.paramx.model.ParameterName;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -17,12 +14,21 @@ import java.util.UUID;
 public class TextParameterNameService {
 
     @Autowired
-    private TextParameterNameRepository repository;
+    private TextParameterNameRepositoryV2 repository;
 
 
-    public List<String> getAllTextParameterNamesByParamUserId(UUID paramUserId) {
-        return repository.findDistinctNamesByUserId(paramUserId);
+    public List<ParameterName> getAllTextParameterNamesByParamUserId(UUID paramUserId) {
+        return repository.findAllByParamUserId(paramUserId);
     }
 
+    public ParameterName save(ParameterName name) {
+        return repository.save(name);
+    }
+
+    public void delete(UUID parameterNameId) {
+        final ParameterName name = repository.findById(parameterNameId)
+                .orElseThrow(() -> new ParamxApiException("Parameter name does not exists", HttpStatus.NOT_FOUND));
+        repository.delete(name);
+    }
 
 }

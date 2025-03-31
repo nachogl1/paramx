@@ -36,33 +36,6 @@ public class E2ETextParameterTests extends E2ETests {
     }
 
     @Test
-    public void givenAParamAdded_WhenFetchingParamNames_ThenReturnOneName() {
-
-        String paramUserId = givenAUserIsCreated("John", "Doe", "John@hotmail.com")
-                .when()
-                .post("/users")
-                .jsonPath()
-                .getString("id");
-
-        givenAUserParameterIsCreated("testName", "testValue", "2024-05-01", paramUserId)
-                .when()
-                .post("/textParameters");
-
-        given()
-                .contentType(ContentType.JSON)
-                .when()
-                .pathParam("paramUserId", paramUserId)
-                .get("/textParameters/names/{paramUserId}")
-                .then()
-                .statusCode(200)
-                .contentType(ContentType.JSON)
-                .body("", contains("testName"));
-
-
-    }
-
-
-    @Test
     public void givenAParamIsAddedForUser_WhenFetchingSpecificUser_ThenParamsAreIncludedInResponse() {
 
         String paramUserId = givenAUserIsCreated("John", "Doe", "John@hotmail.com")
